@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CanvasCreative Studio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0f0f14;
+            --bg-secondary: #1a1a24;
+            --card-bg: #222230;
+            --accent: #8b5cf6;
+            --text-light: #ffffff;
+            --text-gray: #b3b3b3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        section {
+            padding: 80px 10%;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background: var(--bg-secondary);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav h2 {
+            color: var(--accent);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 120px 10%;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            margin: 10px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #6d3fd1;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .card p {
+            color: var(--text-gray);
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            height: 250px;
+            overflow: hidden;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        /* Image Control */
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        /* Hover Zoom Effect */
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* ================= TEAM SECTION ================= */
+
+        #team {
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 60px;
+        }
+
+        /* Grid Layout */
+        .team-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+       }
+
+       /* Card Design */
+       .team-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            width: 320px;
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        .team-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+        }
+
+        /* Image Styling */
+        .team-img img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid rgba(255,255,255,0.2);
+  }
+
+        /* Position */
+        .position {
+            font-weight: bold;
+            color: #00f0ff;
+            margin-bottom: 15px;
+        }
+
+        /* Bio */
+        .bio {
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.85;
+            margin-bottom: 20px;
+        }
+
+        /* Social Links */
+        .social-links a {
+            display: inline-block;
+            margin: 5px 10px;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #00f0ff;
+        }
+        /* Contact */
+        form {
+            max-width: 500px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        input, textarea {
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: var(--card-bg);
+            color: white;
+        }
+
+        textarea {
+            resize: none;
+            height: 120px;
+        }
+
+        button {
+            padding: 12px;
+            border-radius: 30px;
+            border: none;
+            background: var(--accent);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #6d3fd1;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: var(--bg-secondary);
+            color: var(--text-gray);
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: 1s ease;
+        }
+
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media(max-width:768px){
+            .hero h1{
+                font-size:32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <h2>CanvasCreative Studio</h2>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <h1>Designing Ideas Into Digital Reality</h1>
+        <p>We transform creative concepts into impactful digital experiences.</p>
+        <a href="#portfolio" class="btn btn-primary">View Our Work</a>
+        <a href="#contact" class="btn btn-outline">Contact Us</a>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+        <h2 style="text-align:center; margin-bottom:50px;">Our Services</h2>
+        <div class="services-grid">
+            <div class="card fade-in">
+                <h3>Graphic Design</h3>
+                <p>Creative branding, logos, posters and visual storytelling.</p>
+            </div>
+            <div class="card fade-in">
+                <h3>Video Editing</h3>
+                <p>Professional editing that brings stories to life.</p>
+            </div>
+            <div class="card fade-in">
+                <h3>Social Media</h3>
+                <p>Strategic content creation to grow your brand presence.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio">
+        <h2 style="text-align:center; margin-bottom:50px;">Our Portfolio</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item fade-in" data-img="images/project1.jpg">
+                <img src="images/Project1.jpg">
+            </div>
+
+            <div class="portfolio-item fade-in" data-img="images/project2.jpg">
+                <img src="images/Project2.jpg">
+            </div>
+            <div class="portfolio-item fade-in" data-img="images/project3.jpg">
+                <img src="images/Project3.jpg">
+            </div>
+
+            <div class="portfolio-item fade-in" data-img="images/project4.jpg">
+                <img src="images/Project4.jpg">
+            </div>
+        </div>
+    </section>
+    
+    <section id="team">
+        <h2 class="section-title">Meet Our Leadership</h2>
+
+        <div class="team-grid">
+
+            <!-- Arijit -->
+            <div class="team-card">
+                <div class="team-img">
+                    <img src="images/Arijit.jpg" alt="Arijit Panda">
+                </div>
+                <h3>Arijit Panda</h3>
+                <p class="position">Founder & Creative Director</p>
+                <p class="bio">
+                    Creative and technically skilled founder focused on branding, UI design, and digital solutions.
+                    Dedicated to transforming ideas into powerful and scalable creative experiences.
+                </p>
+
+                <div class="social-links">
+                    <a href="mailto:arijitpanda07@gmail.com">Email</a>
+                    <a href="https://www.linkedin.com/in/arijit-panda2007" target="_blank">LinkedIn</a>
+                    <a href="https://www.instagram.com/ap_the_silentdevil?igsh=ZmJyMzh1MjNjaDRn" target="_blank">Instagram</a>
+                </div>
+            </div>
+
+            <!-- Abhirup -->
+            <div class="team-card">
+                <div class="team-img">
+                    <img src="images/Abhirup.jpg" alt="Abhirup Sinha">
+                </div>
+                <h3>Abhirup Sinha</h3>
+                <p class="position">Co-Founder & Strategy Lead</p>
+                <p class="bio">
+                    Strategic communicator and business developer dedicated to client engagement, growth strategy,
+                    and venture expansion. Focused on turning creative ideas into sustainable business success.
+                </p>
+
+                <div class="social-links">
+                    <a href="mailto:sinhaabhirup781@gmail.com">Email</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+    <h2 style="text-align:center; margin-bottom:40px;">Contact Us</h2>
+    <form id="contact-form" action="https://formspree.io/f/mbdaqvrd" method="POST">
+        <label>
+            Your Name:
+            <input type="text" name="name" required>
+        </label>
+        <label>
+            Your Email:
+            <input type="email" name="email" required>
+        </label>
+        <label>
+            Your Message:
+            <textarea name="message" required></textarea>
+        </label>
+        <button type="submit">Send Message</button>
+        <p id="form-status" style="text-align:center; color: #8b5cf6;"></p>
+    </form>
+</section>
+
+    <!-- Footer -->
+    <footer>
+        © 2026 CanvasCreative Studio. All Rights Reserved.
+    </footer>
+
+<script>
+
+// Scroll Animation
+const faders = document.querySelectorAll('.fade-in');
+
+const appearOptions = { threshold: 0.3 };
+
+const appearOnScroll = new IntersectionObserver(function(entries, observer){
+    entries.forEach(entry => {
+        if(!entry.isIntersecting) return;
+        entry.target.classList.add("show");
+        observer.unobserve(entry.target);
+    });
+}, appearOptions);
+
+faders.forEach(fader => {
+    appearOnScroll.observe(fader);
+});
+
+
+// =============================
+// FORM SUCCESS MESSAGE
+// =============================
+
+const form = document.getElementById("contact-form");
+const status = document.getElementById("form-status");
+
+async function handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+
+    fetch(event.target.action, {
+        method: form.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            status.innerHTML = "✅ Message Sent Successfully!";
+            form.reset();
+        } else {
+            status.innerHTML = "❌ Oops! Something went wrong.";
+        }
+    }).catch(error => {
+        status.innerHTML = "❌ Network error. Try again.";
+    });
+}
+
+form.addEventListener("submit", handleSubmit);
+
+
+// =============================
+// PORTFOLIO POPUP GALLERY
+// =============================
+
+const portfolioItems = document.querySelectorAll(".portfolio-item");
+
+portfolioItems.forEach(item => {
+    item.addEventListener("click", () => {
+        const popup = document.createElement("div");
+        popup.style.position = "fixed";
+        popup.style.top = "0";
+        popup.style.left = "0";
+        popup.style.width = "100%";
+        popup.style.height = "100%";
+        popup.style.background = "rgba(0,0,0,0.8)";
+        popup.style.display = "flex";
+        popup.style.alignItems = "center";
+        popup.style.justifyContent = "center";
+        popup.style.zIndex = "2000";
+
+        const img = document.createElement("img");
+        img.src = item.getAttribute("data-img");
+        img.style.maxWidth = "80%";
+        img.style.borderRadius = "15px";
+
+        popup.appendChild(img);
+
+        popup.addEventListener("click", () => {
+            popup.remove();
+        });
+
+        document.body.appendChild(popup);
+    });
+});
+
+</script>
+
+</body>
+</html>
