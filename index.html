@@ -329,7 +329,30 @@
                 display: block;
             }
 
-        }    
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .hero-buttons a {
+                width: 80%;
+                text-align: center;
+            }
+
+        }
+        
     </style>
 </head>
 
@@ -350,8 +373,10 @@
     <section class="hero" id="home">
         <h1>Designing Ideas Into Digital Reality</h1>
         <p>We transform creative concepts into impactful digital experiences.</p>
-        <a href="#portfolio" class="btn btn-primary">View Our Work</a>
-        <a href="#contact" class="btn btn-outline">Contact Us</a>
+        <div class="hero-buttons"></div>
+            <a href="#portfolio" class="btn btn-primary">View Our Work</a>
+            <a href="#contact" class="btn btn-outline">Contact Us</a>
+        </div>
     </section>
 
     <!-- Services -->
